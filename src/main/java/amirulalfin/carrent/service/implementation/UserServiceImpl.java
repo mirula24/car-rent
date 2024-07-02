@@ -33,11 +33,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(Integer id,UserDTO Request) {
-        User user =this.getById(id);
-        user.setName(Request.getName());
-        user.setBalance(Request.getBalance());
-        return userRepository.save(user);
+    public User update(User request){
+        User req = userRepository.findById(request.getId()).orElse(null);
+        req.setName(request.getName());
+        req.setBalance(request.getBalance());
+        return userRepository.save(req);
     }
 
     @Override
@@ -46,10 +46,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User topUp(Integer id, Integer nominal) {
-        User user = this.getById(id);
-        Integer total = user.getBalance() + nominal;
-        user.setBalance(total);
-        return userRepository.save(user);
+    public User topUp(Integer id,Integer topup) {
+        User req = userRepository.findById(id).orElse(null);
+        Integer total = req.getBalance() + topup;
+        req.setBalance(total);
+        return userRepository.save(req);
     }
 }

@@ -5,7 +5,6 @@ import amirulalfin.carrent.model.User;
 import amirulalfin.carrent.service.UserService;
 import amirulalfin.carrent.utils.DTO.UserDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,8 +31,8 @@ public class UserController {
     }
 
     @PutMapping
-    public User update(@RequestBody Integer id,@RequestBody UserDTO request) {
-        return userService.update(id,request);
+    public User update(@RequestBody User request) {
+        return userService.update(request);
     }
 
     @DeleteMapping("/{id}")
@@ -41,8 +40,8 @@ public class UserController {
         userService.delete(id);
     }
 
-    @PutMapping("/{id}/{nominal}")
-    public User topUp(@PathVariable Integer id,@PathVariable Integer nominal) {
-       return userService.topUp(id, nominal);
+    @PostMapping("/{id}/{topup}")
+    public User topUp(@PathVariable Integer id,@PathVariable Integer topup) {
+       return userService.topUp(id,topup);
     }
 }

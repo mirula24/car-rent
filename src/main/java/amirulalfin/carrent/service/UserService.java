@@ -9,8 +9,8 @@ public interface UserService {
     User create(UserDTO Request);
     List<User> getAll();
     User getById(Integer id);
-    User update(Integer id,UserDTO Request);
+    User update(User Request);
     void delete(Integer id);
-    User topUp(Integer id, Integer nominal);
+    User topUp(Integer id,Integer topUp);
 
 }
