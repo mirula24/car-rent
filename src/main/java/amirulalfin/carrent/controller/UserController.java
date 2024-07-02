@@ -42,8 +42,6 @@ public class UserController {
 
     @PutMapping("/{id}")
     public User topUp(@PathVariable Integer id,@PathVariable Integer nominal) {
-        User user = userService.getById(id);
-        user.setBalance(user.getBalance()+nominal);
-       return userService.topUp(id, user.getBalance());
+       return userService.topUp(id, nominal);
     }
 }

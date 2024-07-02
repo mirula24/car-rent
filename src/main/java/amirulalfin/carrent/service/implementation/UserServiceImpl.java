@@ -43,7 +43,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User topUp(Integer id, Integer nominal) {
         User user = this.getById(id);
-        user.setBalance(nominal);
+        Integer total = user.getBalance() + nominal;
+        user.setBalance(total);
         return userRepository.save(user);
     }
 }
