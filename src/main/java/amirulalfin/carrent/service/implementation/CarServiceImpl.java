@@ -2,7 +2,6 @@ package amirulalfin.carrent.service.implementation;
 
 import amirulalfin.carrent.model.Brand;
 import amirulalfin.carrent.model.Car;
-import amirulalfin.carrent.repository.BrandRepository;
 import amirulalfin.carrent.repository.CarRepository;
 import amirulalfin.carrent.service.BrandService;
 import amirulalfin.carrent.service.CarService;
