@@ -1,6 +1,5 @@
 package amirulalfin.carrent.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +19,6 @@ public class Car {
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
-    @JsonIgnore
     private Brand brand;
 
     private boolean available;

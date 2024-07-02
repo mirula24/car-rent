@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 @Builder
 public class CarDTO {
+    private Integer id;
     private String name;
     private Integer brand_id;
     private boolean available;
