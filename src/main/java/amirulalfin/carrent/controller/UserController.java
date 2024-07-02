@@ -40,7 +40,7 @@ public class UserController {
         userService.delete(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/{nominal}")
     public User topUp(@PathVariable Integer id,@PathVariable Integer nominal) {
        return userService.topUp(id, nominal);
     }
