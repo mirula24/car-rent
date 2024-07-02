@@ -1,0 +1,996 @@
+openapi: 3.0.0
+info:
+  title: car-rent
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: user
+  - name: brand
+  - name: Car
+  - name: Rents
+paths:
+  /users:
+    post:
+      tags:
+        - user
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: '{{$randomUserName}}'
+                balance: 15000
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:41:01 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1
+                name: Aurelie.Stiedemann89
+                balance: 15000
+    get:
+      tags:
+        - user
+      summary: Get All
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:41:29 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: OK
+                message: KETEMU
+                data:
+                  content:
+                    - id: 1
+                      name: Aurelie.Stiedemann89
+                      balance: 15000
+                  totalElements: 1
+                  totalPages: 1
+                  page: 0
+                  size: 10
+    put:
+      tags:
+        - user
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: amirul
+                balance: 15000
+                id: '{{user_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:42:31 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1
+                name: amirul
+                balance: 15000
+  /users/{user_id}:
+    get:
+      tags:
+        - user
+      summary: Get One
+      parameters:
+        - name: user_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:41:20 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1
+                name: Aurelie.Stiedemann89
+                balance: 15000
+    delete:
+      tags:
+        - user
+      summary: Delete
+      parameters:
+        - name: user_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Length:
+              schema:
+                type: integer
+                example: '0'
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:49:20 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: null
+  /users/{user_id}/90000:
+    post:
+      tags:
+        - user
+      summary: TopUp
+      requestBody:
+        content: {}
+      parameters:
+        - name: user_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:43:07 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1
+                name: amirul
+                balance: 1013010
+  /brands:
+    post:
+      tags:
+        - brand
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: '{{$randomFirstName}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:42:46 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1
+                name: Phyllis
+    get:
+      tags:
+        - brand
+      summary: Get All
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:44:03 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: OK
+                message: KETEMU
+                data:
+                  content:
+                    - id: 1
+                      name: Phyllis
+                  totalElements: 1
+                  totalPages: 1
+                  page: 0
+                  size: 10
+    put:
+      tags:
+        - brand
+      summary: update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: |-
+                {
+                    "id": {{brand_id}},
+                    "name" : "toyota"
+                }
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:44:16 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1
+                name: toyota
+  /brands/{brand_id}:
+    get:
+      tags:
+        - brand
+      summary: Get One
+      parameters:
+        - name: brand_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:43:29 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1
+                name: Phyllis
+    delete:
+      tags:
+        - brand
+      summary: Delete
+      parameters:
+        - name: brand_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Length:
+              schema:
+                type: integer
+                example: '0'
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:48:50 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: null
+  /cars:
+    post:
+      tags:
+        - Car
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: |-
+                {
+                    "id": 33,
+                    "name": "{{$randomUserName}}",
+                    "brand_id": {{brand_id}},
+                    "available": true,
+                    "price": {{$randomPrice}}
+                }
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:44:32 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1
+                name: Hester_Doyle
+                brand:
+                  id: 1
+                  name: toyota
+                available: true
+                price: 167
+    get:
+      tags:
+        - Car
+      summary: Get All
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:45:04 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: OK
+                message: KETEMU
+                data:
+                  content:
+                    - id: 1
+                      name: Hester_Doyle
+                      brand:
+                        id: 1
+                        name: toyota
+                      available: true
+                      price: 167
+                  totalElements: 1
+                  totalPages: 1
+                  page: 0
+                  size: 10
+    put:
+      tags:
+        - Car
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: |-
+                {
+                    "id": {{car_id}},
+                    "name": "{{$randomUserName}}",
+                    "brand_id": {{brand_id}},
+                    "available": true,
+                    "price": {{$randomPrice}}
+                }
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:45:16 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1
+                name: Abbey58
+                brand:
+                  id: 1
+                  name: toyota
+                available: true
+                price: 906
+  /cars/{car_id}:
+    get:
+      tags:
+        - Car
+      summary: Get one
+      parameters:
+        - name: car_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:44:50 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1
+                name: Hester_Doyle
+                brand:
+                  id: 1
+                  name: toyota
+                available: true
+                price: 167
+    delete:
+      tags:
+        - Car
+      summary: Delete
+      parameters:
+        - name: car_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Length:
+              schema:
+                type: integer
+                example: '0'
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:46:56 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: null
+  /rents:
+    post:
+      tags:
+        - Rents
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: |-
+                {
+                    "car_id": {{car_id}},
+                    "user_id": {{user_id}},
+                    "started_at": "2024-07-02T07:24:15+07:00",
+                    "ended_at": "2024-07-02T07:30:15+07:00"
+                }
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:45:50 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1
+                completed: false
+                car:
+                  id: 1
+                  name: Abbey58
+                  brand:
+                    id: 1
+                    name: toyota
+                  available: true
+                  price: 906
+                user:
+                  id: 1
+                  name: amirul
+                  balance: 1013010
+                started_at: '2024-07-02T00:24:15.000+00:00'
+                ended_at: '2024-07-02T00:30:15.000+00:00'
+                price: 906
+    get:
+      tags:
+        - Rents
+      summary: Get All
+      parameters:
+        - name: size
+          in: query
+          schema:
+            type: integer
+          example: '5'
+        - name: page
+          in: query
+          schema:
+            type: integer
+          example: '0'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:46:16 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: OK
+                message: KETEMU
+                data:
+                  content:
+                    - id: 1
+                      completed: false
+                      car:
+                        id: 1
+                        name: Abbey58
+                        brand:
+                          id: 1
+                          name: toyota
+                        available: true
+                        price: 906
+                      user:
+                        id: 1
+                        name: amirul
+                        balance: 1013010
+                      started_at: '2024-07-02T00:24:15.000+00:00'
+                      ended_at: '2024-07-02T00:30:15.000+00:00'
+                      price: 906
+                  totalElements: 1
+                  totalPages: 1
+                  page: 0
+                  size: 5
+  /rents/{rent_id}:
+    get:
+      tags:
+        - Rents
+      summary: Get One
+      parameters:
+        - name: rent_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:46:00 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1
+                completed: false
+                car:
+                  id: 1
+                  name: Abbey58
+                  brand:
+                    id: 1
+                    name: toyota
+                  available: true
+                  price: 906
+                user:
+                  id: 1
+                  name: amirul
+                  balance: 1013010
+                started_at: '2024-07-02T00:24:15.000+00:00'
+                ended_at: '2024-07-02T00:30:15.000+00:00'
+                price: 906
+    put:
+      tags:
+        - Rents
+      summary: Update
+      requestBody:
+        content: {}
+      parameters:
+        - name: rent_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:46:26 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1
+                completed: true
+                car:
+                  id: 1
+                  name: Abbey58
+                  brand:
+                    id: 1
+                    name: toyota
+                  available: true
+                  price: 906
+                user:
+                  id: 1
+                  name: amirul
+                  balance: 1012104
+                started_at: '2024-07-02T00:24:15.000+00:00'
+                ended_at: '2024-07-02T00:30:15.000+00:00'
+                price: 906
+    delete:
+      tags:
+        - Rents
+      summary: Delete
+      parameters:
+        - name: rent_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Length:
+              schema:
+                type: integer
+                example: '0'
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Jul 2024 15:46:41 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: null
