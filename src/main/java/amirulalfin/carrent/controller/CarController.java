@@ -1,9 +1,17 @@
 package amirulalfin.carrent.controller;
 
 import amirulalfin.carrent.model.Car;
+import amirulalfin.carrent.model.User;
 import amirulalfin.carrent.service.CarService;
 import amirulalfin.carrent.utils.DTO.CarDTO;
+import amirulalfin.carrent.utils.page.PageResponseWrapper;
+import amirulalfin.carrent.utils.page.Res;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +23,16 @@ public class CarController {
     private final CarService carService;
 
   @GetMapping
-    public List<Car> findAll() {
-      return carService.getAll();
+  public ResponseEntity<?> getAllCar(@PageableDefault(size=10) Pageable pageable
+  ) {
+
+    Page<Car> res = carService.getAll(pageable);
+    PageResponseWrapper<Car> result = new PageResponseWrapper<>(res);
+    return Res.renderJson(
+            result,
+            "KETEMU",
+            HttpStatus.OK
+    );
   }
 
   @GetMapping("/{id}")

@@ -4,7 +4,14 @@ package amirulalfin.carrent.controller;
 import amirulalfin.carrent.model.User;
 import amirulalfin.carrent.service.UserService;
 import amirulalfin.carrent.utils.DTO.UserDTO;
+import amirulalfin.carrent.utils.page.PageResponseWrapper;
+import amirulalfin.carrent.utils.page.Res;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +28,16 @@ public class UserController {
 
     }
     @GetMapping
-    public List<User> getAll() {
-        return userService.getAll();
+    public ResponseEntity<?> getAllStudents(@PageableDefault(size=10)Pageable pageable
+    ) {
+
+        Page<User> res = userService.getAll(pageable);
+        PageResponseWrapper<User> result = new PageResponseWrapper<>(res);
+        return Res.renderJson(
+                result,
+                "KETEMU",
+                HttpStatus.OK
+        );
     }
 
     @GetMapping("/{id}")

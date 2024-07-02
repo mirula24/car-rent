@@ -10,6 +10,8 @@ import amirulalfin.carrent.service.UserService;
 import amirulalfin.carrent.utils.DTO.CarDTO;
 import amirulalfin.carrent.utils.DTO.RentDTO;
 import amirulalfin.carrent.utils.DTO.UserDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -49,8 +51,8 @@ public class RentServiceImpl implements RentService {
     }
 
     @Override
-    public List<Rent> getAll() {
-        return rentRepository.findAll();
+    public Page<Rent> getAll(Pageable pageable) {
+        return rentRepository.findAll(pageable);
     }
 
     @Override

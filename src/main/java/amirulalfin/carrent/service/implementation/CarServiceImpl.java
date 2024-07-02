@@ -6,6 +6,8 @@ import amirulalfin.carrent.repository.CarRepository;
 import amirulalfin.carrent.service.BrandService;
 import amirulalfin.carrent.service.CarService;
 import amirulalfin.carrent.utils.DTO.CarDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,7 +57,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> getAll() {
-        return carRepository.findAll();
+    public Page<Car> getAll(Pageable pageable) {
+        return carRepository.findAll(pageable);
     }
 }

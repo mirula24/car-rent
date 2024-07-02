@@ -5,6 +5,8 @@ import amirulalfin.carrent.repository.BrandRepository;
 import amirulalfin.carrent.service.BrandService;
 import amirulalfin.carrent.utils.DTO.BrandDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,8 +29,8 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public List<Brand> getAll() {
-        return brandRepository.findAll();
+    public Page<Brand> getAll(Pageable pageable) {
+        return brandRepository.findAll(pageable);
     }
 
     @Override

@@ -1,9 +1,17 @@
 package amirulalfin.carrent.controller;
 
 import amirulalfin.carrent.model.Rent;
+import amirulalfin.carrent.model.User;
 import amirulalfin.carrent.service.RentService;
 import amirulalfin.carrent.utils.DTO.RentDTO;
+import amirulalfin.carrent.utils.page.PageResponseWrapper;
+import amirulalfin.carrent.utils.page.Res;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +23,15 @@ public class RentController {
     private final RentService rentService;
 
     @GetMapping
-    public List<Rent> getAll(){
-        return rentService.getAll();
+    public ResponseEntity<?> getAllRent(@PageableDefault(size=10) Pageable pageable
+    ) {
+        Page<Rent> res = rentService.getAll(pageable);
+        PageResponseWrapper<Rent> result = new PageResponseWrapper<>(res);
+        return Res.renderJson(
+                result,
+                "KETEMU",
+                HttpStatus.OK
+        );
     }
 
     @GetMapping("/{id}")
