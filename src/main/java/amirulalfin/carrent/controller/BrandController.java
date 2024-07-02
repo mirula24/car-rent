@@ -2,8 +2,6 @@ package amirulalfin.carrent.controller;
 
 
 import amirulalfin.carrent.model.Brand;
-import amirulalfin.carrent.model.Car;
-import amirulalfin.carrent.model.User;
 import amirulalfin.carrent.service.BrandService;
 import amirulalfin.carrent.utils.DTO.BrandDTO;
 import amirulalfin.carrent.utils.page.PageResponseWrapper;
@@ -15,8 +13,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/brands")
@@ -31,7 +27,7 @@ public class BrandController
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllBrand(@PageableDefault(size=10) Pageable pageable
+    public ResponseEntity<?> getAllBrand(@PageableDefault() Pageable pageable
     ) {
 
         Page<Brand> res = brandService.getAll(pageable);
@@ -49,11 +45,11 @@ public class BrandController
     }
     @PutMapping
     public Brand update(@RequestBody Brand brand){
-        return brandService.update(brand);
+        return brandService.update(brand.getId(),brand);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@RequestParam Integer id){
+    public void delete(@PathVariable Integer id){
         brandService.delete(id);
     }
 }

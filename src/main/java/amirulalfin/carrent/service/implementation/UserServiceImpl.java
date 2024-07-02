@@ -9,8 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -37,6 +35,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User update(Integer id,UserDTO request){
         User req = userRepository.findById(id).orElse(null);
+        assert req != null;
         req.setName(request.getName());
         req.setBalance(request.getBalance());
         return userRepository.save(req);
@@ -50,6 +49,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User topUp(Integer id,Integer topup) {
         User req = userRepository.findById(id).orElse(null);
+        assert req != null;
         Integer total = req.getBalance() + topup;
         req.setBalance(total);
         return userRepository.save(req);

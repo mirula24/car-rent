@@ -9,9 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
-
 @Service
 @RequiredArgsConstructor
 public class BrandServiceImpl implements BrandService {
@@ -34,8 +31,8 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public Brand update(Brand brand) {
-        Brand replace = this.getById(brand.getId());
+    public Brand update(Integer id,Brand brand) {
+        Brand replace = this.getById(id);
         replace.setName(brand.getName());
         return brandRepository.save(replace);
     }

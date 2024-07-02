@@ -14,8 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -28,14 +26,14 @@ public class UserController {
 
     }
     @GetMapping
-    public ResponseEntity<?> getAllStudents(@PageableDefault(size=10)Pageable pageable
+    public ResponseEntity<?> getAllStudents(@PageableDefault()Pageable pageable
     ) {
 
         Page<User> res = userService.getAll(pageable);
         PageResponseWrapper<User> result = new PageResponseWrapper<>(res);
         return Res.renderJson(
                 result,
-                "KETEMU",
+                "Found",
                 HttpStatus.OK
         );
     }
@@ -45,9 +43,9 @@ public class UserController {
         return userService.getById(id);
     }
 
-    @PutMapping("/update")
-    public User update(@RequestBody Integer id,@RequestBody UserDTO request) {
-        return userService.update(id,request);
+    @PutMapping()
+    public User update(@RequestBody UserDTO request) {
+        return userService.update(request.getId(),request);
     }
 
     @DeleteMapping("/{id}")
