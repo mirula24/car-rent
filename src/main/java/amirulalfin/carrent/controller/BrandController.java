@@ -4,6 +4,7 @@ package amirulalfin.carrent.controller;
 import amirulalfin.carrent.model.Brand;
 import amirulalfin.carrent.model.User;
 import amirulalfin.carrent.service.BrandService;
+import amirulalfin.carrent.utils.DTO.BrandDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class BrandController
     private final BrandService brandService;
 
     @PostMapping
-    public Brand create(@RequestBody Brand brand){
+    public Brand create(@RequestBody BrandDTO brand){
         return brandService.create(brand);
     }
 
