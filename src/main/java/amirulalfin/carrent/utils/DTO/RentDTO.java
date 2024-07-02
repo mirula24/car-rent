@@ -10,11 +10,8 @@ import java.util.Date;
 @Setter
 @Builder
 public class RentDTO {
-    private Integer id;
-    private boolean completed;
     private Integer car_id;
     private Integer user_id;
     private Date started_at;
     private Date ended_at;
-    private Integer price;
 }

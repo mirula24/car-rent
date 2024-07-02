@@ -7,9 +7,12 @@ import amirulalfin.carrent.repository.RentRepository;
 import amirulalfin.carrent.service.CarService;
 import amirulalfin.carrent.service.RentService;
 import amirulalfin.carrent.service.UserService;
+import amirulalfin.carrent.utils.DTO.CarDTO;
 import amirulalfin.carrent.utils.DTO.RentDTO;
+import amirulalfin.carrent.utils.DTO.UserDTO;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,14 +31,12 @@ public class RentServiceImpl implements RentService {
     public Rent save(RentDTO rent) {
         Rent rentEntity = new Rent();
         User user = userService.getById(rent.getUser_id());
-
-
         Car car = carService.getOne(rent.getCar_id());
 
         rentEntity.setUser(user);
         rentEntity.setCar(car);
-        rentEntity.setCompleted(rent.isCompleted());
-        rentEntity.setPrice(rent.getPrice());
+        rentEntity.setCompleted(false);
+        rentEntity.setPrice(car.getPrice());
         rentEntity.setStarted_at(rent.getStarted_at());
         rentEntity.setEnded_at(rent.getEnded_at());
 
@@ -58,19 +59,28 @@ public class RentServiceImpl implements RentService {
     }
 
     @Override
-    public Rent update(Integer id, RentDTO rent) {
+    public Rent update(Integer id) {
         Rent update = rentRepository.findById(id).orElse(null);
-        User user = userService.getById(rent.getUser_id());
-        Car car = carService.getOne(rent.getCar_id());
-
         assert update != null;
-        update.setCompleted(rent.isCompleted());
-        update.setPrice(rent.getPrice());
-        update.setStarted_at(rent.getStarted_at());
-        update.setEnded_at(rent.getEnded_at());
-        update.setCar(car);
-        update.setUser(user);
-        update.setId(id);
+        User user = userService.getById(update.getUser().getId());
+        Car car = carService.getOne(update.getCar().getId());
+
+        update.setCompleted(true);
+
+        
+        CarDTO carDTO = new CarDTO().parse(car);
+         carDTO.setAvailable(true);
+
+        carService.update(car.getId(),carDTO);
+
+        if(update.getEnded_at().after(new Date()))  {
+            update.setPrice((int) (car.getPrice() * 1.1));
+        }
+
+        UserDTO userDTO = new UserDTO().parse(user);
+        userDTO.setBalance(user.getBalance() - update.getPrice());
+
+        userService.update(user.getId(),userDTO);
 
         return rentRepository.save(update);
     }
