@@ -3,6 +3,7 @@ package amirulalfin.carrent.service.implementation;
 import amirulalfin.carrent.model.User;
 import amirulalfin.carrent.repository.UserRepository;
 import amirulalfin.carrent.service.UserService;
+import amirulalfin.carrent.utils.DTO.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+
     @Override
-    public User create(User Request) {
-        return userRepository.save(Request);
+    public User create(UserDTO Request) {
+        User user = new User();
+        user.setName(Request.getName());
+        user.setBalance(Request.getBalance());
+        return userRepository.save(user);
     }
 
     @Override
@@ -28,8 +33,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(User Request) {
-        User user =this.getById(Request.getId());
+    public User update(Integer id,UserDTO Request) {
+        User user =this.getById(id);
         user.setName(Request.getName());
         user.setBalance(Request.getBalance());
         return userRepository.save(user);
