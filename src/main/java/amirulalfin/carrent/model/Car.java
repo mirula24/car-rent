@@ -20,7 +20,6 @@ public class Car {
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
-    @JsonIgnore
     private Brand brand;
 
     private boolean available;
