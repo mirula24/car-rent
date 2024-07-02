@@ -10,5 +10,5 @@ public interface RentService {
     Rent getOne(Integer id);
     List<Rent> getAll();
     void delete(Integer id);
-    Rent update(Integer id,RentDTO rent);
+    Rent update(Integer id);
 }

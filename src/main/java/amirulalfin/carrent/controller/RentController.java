@@ -24,9 +24,9 @@ public class RentController {
         return rentService.getOne(id);
     }
 
-    @PutMapping
-    public Rent update(@RequestBody RentDTO rent){
-        return rentService.update(rent.getId(),rent);
+    @PutMapping("/{id}")
+    public Rent update(@PathVariable Integer id){
+        return rentService.update(id);
     }
 
     @DeleteMapping("/{id}")
