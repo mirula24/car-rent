@@ -1,4 +1,4 @@
-package amirulalfin.model;
+package amirulalfin.carrent.model;
 
 import jakarta.persistence.*;
 import lombok.*;
