@@ -33,8 +33,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(User request){
-        User req = userRepository.findById(request.getId()).orElse(null);
+    public User update(Integer id,UserDTO request){
+        User req = userRepository.findById(id).orElse(null);
         req.setName(request.getName());
         req.setBalance(request.getBalance());
         return userRepository.save(req);

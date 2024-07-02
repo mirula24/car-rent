@@ -30,9 +30,9 @@ public class UserController {
         return userService.getById(id);
     }
 
-    @PutMapping
-    public User update(@RequestBody User request) {
-        return userService.update(request);
+    @PutMapping("/update")
+    public User update(@RequestBody Integer id,@RequestBody UserDTO request) {
+        return userService.update(id,request);
     }
 
     @DeleteMapping("/{id}")
