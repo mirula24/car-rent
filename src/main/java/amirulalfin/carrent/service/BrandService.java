@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 public interface BrandService {
     Brand create(BrandDTO brand);
     Brand getById(Integer id);
-    Page<Brand> getAll(Pageable pageable);
+    Page<Brand> getAll(Pageable pageable,String name);
     Brand update(Integer id,Brand brand);
     void delete(Integer id);
 }

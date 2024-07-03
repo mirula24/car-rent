@@ -4,9 +4,11 @@ import amirulalfin.carrent.model.Brand;
 import amirulalfin.carrent.repository.BrandRepository;
 import amirulalfin.carrent.service.BrandService;
 import amirulalfin.carrent.utils.DTO.BrandDTO;
+import amirulalfin.carrent.utils.specification.BrandSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,14 +23,17 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public Brand getById(Integer id) {
-        return brandRepository.findById(id).orElse(null);
+    public Page<Brand> getAll(Pageable pageable, String name) {
+        Specification<Brand> spec = BrandSpecification.getSpecification(name);
+        return brandRepository.findAll(spec, pageable);
     }
 
     @Override
-    public Page<Brand> getAll(Pageable pageable) {
-        return brandRepository.findAll(pageable);
+    public Brand getById(Integer id) {
+        return brandRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("student with id: " + id + " not found"));
     }
+
 
     @Override
     public Brand update(Integer id,Brand brand) {

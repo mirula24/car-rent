@@ -1,6 +1,7 @@
 package amirulalfin.carrent.utils.DTO;
 
 import amirulalfin.carrent.model.Car;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @AllArgsConstructor
@@ -9,10 +10,16 @@ import lombok.*;
 @Setter
 @Builder
 public class CarDTO {
+
+    @NotBlank
     private Integer id;
+    @NotBlank
     private String name;
+    @NotBlank
     private Integer brand_id;
+    @NotBlank
     private boolean available;
+    @NotBlank
     private Integer price;
 
 
