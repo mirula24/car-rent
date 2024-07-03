@@ -26,21 +26,24 @@ public class UserController {
 
     }
     @GetMapping
-    public ResponseEntity<?> getAllStudents(@PageableDefault()Pageable pageable
+    public ResponseEntity<?> getAll(
+            @PageableDefault(size=10)Pageable pageable,
+            @RequestParam(required = false) String name
     ) {
-
-        Page<User> res = userService.getAll(pageable);
-        PageResponseWrapper<User> result = new PageResponseWrapper<>(res);
         return Res.renderJson(
-                result,
-                "Found",
+                new PageResponseWrapper<>(userService.getAll(pageable, name)),
+                "KETEMU",
                 HttpStatus.OK
         );
     }
 
     @GetMapping("/{id}")
-    public User getByid(@PathVariable Integer id){
-        return userService.getById(id);
+    public ResponseEntity<?> getOne(@PathVariable Integer id) {
+        return Res.renderJson(
+                userService.getById(id),
+                "found",
+                HttpStatus.OK
+        );
     }
 
     @PutMapping()

@@ -1,12 +1,16 @@
 package amirulalfin.carrent.service.implementation;
 
+import amirulalfin.carrent.model.Brand;
 import amirulalfin.carrent.model.User;
 import amirulalfin.carrent.repository.UserRepository;
 import amirulalfin.carrent.service.UserService;
 import amirulalfin.carrent.utils.DTO.UserDTO;
+import amirulalfin.carrent.utils.specification.BrandSpecification;
+import amirulalfin.carrent.utils.specification.UserSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,8 +27,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<User> getAll(Pageable pageable) {
-        return userRepository.findAll(pageable);
+    public Page<User> getAll(Pageable pageable,String name) {
+        Specification<User> spec = UserSpecification.byUsername(name);
+        return userRepository.findAll(spec,pageable);
     }
 
     @Override
