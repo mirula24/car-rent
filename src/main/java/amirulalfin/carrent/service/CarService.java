@@ -12,5 +12,5 @@ public interface CarService {
     Car update(Integer id,CarDTO car);
     void delete(Integer id);
     Car getOne(Integer id);
-    Page<Car> getAll(Pageable pageable);
+    Page<Car> getAll(Pageable pageable,String name,Boolean active);
 }

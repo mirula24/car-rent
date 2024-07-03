@@ -6,8 +6,10 @@ import amirulalfin.carrent.repository.CarRepository;
 import amirulalfin.carrent.service.BrandService;
 import amirulalfin.carrent.service.CarService;
 import amirulalfin.carrent.utils.DTO.CarDTO;
+import amirulalfin.carrent.utils.specification.CarSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,7 +59,9 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Page<Car> getAll(Pageable pageable) {
+    public Page<Car> getAll(Pageable pageable,String name,Boolean available) {
+        Specification<Car> spec = CarSpecification.carSpecification(name,
+                available);
         return carRepository.findAll(pageable);
     }
 }
