@@ -6,12 +6,14 @@ import amirulalfin.carrent.service.RentService;
 import amirulalfin.carrent.utils.DTO.RentDTO;
 import amirulalfin.carrent.utils.page.PageResponseWrapper;
 import amirulalfin.carrent.utils.page.Res;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/rents")
 @RequiredArgsConstructor
+@Validated
 public class RentController {
     private final RentService rentService;
 
@@ -50,7 +53,7 @@ public class RentController {
     }
 
     @PostMapping
-    public Rent create(@RequestBody RentDTO rentDTO){
+    public Rent create(@Valid @RequestBody RentDTO rentDTO){
         return rentService.save(rentDTO);
     }
 }

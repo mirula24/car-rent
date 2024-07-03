@@ -6,6 +6,7 @@ import amirulalfin.carrent.service.UserService;
 import amirulalfin.carrent.utils.DTO.UserDTO;
 import amirulalfin.carrent.utils.page.PageResponseWrapper;
 import amirulalfin.carrent.utils.page.Res;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +22,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public User create(@RequestBody UserDTO request) {
+    public User create(@Valid @RequestBody UserDTO request) {
         return userService.create(request);
 
     }
