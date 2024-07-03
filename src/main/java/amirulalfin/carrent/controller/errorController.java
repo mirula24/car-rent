@@ -22,7 +22,7 @@ public class errorController {
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
         if (e.getMessage().contains("brand_id")) {
-            message = "birthDate cannot be blank";
+            message = "this field cannot be blank";
         }
         return Res.renderJson(null,message, status);
     }
@@ -32,8 +32,8 @@ public class errorController {
         String message = e.getMessage();
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
-        if (e.getMessage().contains("student with id")) {
-            message = "student not found";
+        if (e.getMessage().contains("User with id")) {
+            message = "User not found";
         }
         return Res.renderJson(null, message, HttpStatus.BAD_REQUEST);
     }

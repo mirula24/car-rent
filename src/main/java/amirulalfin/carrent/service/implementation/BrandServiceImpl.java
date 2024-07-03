@@ -31,7 +31,8 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public Brand getById(Integer id) {
         return brandRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("student with id: " + id + " not found"));
+                .orElseThrow(() -> new RuntimeException("Brand with id: " + id +
+                        " not found"));
     }
 
 
