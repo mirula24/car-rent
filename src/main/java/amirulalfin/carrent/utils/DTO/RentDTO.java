@@ -13,12 +13,11 @@ import java.util.Date;
 @Builder
 public class RentDTO {
 
-    @NotBlank
+    @NotNull
     private Integer car_id;
-    @NotBlank
+    @NotNull
     private Integer user_id;
-    @NotBlank
     private Date started_at;
-    @NotBlank
+
     private Date ended_at;
 }

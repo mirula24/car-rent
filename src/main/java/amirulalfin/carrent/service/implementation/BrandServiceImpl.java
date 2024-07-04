@@ -37,7 +37,7 @@ public class BrandServiceImpl implements BrandService {
 
 
     @Override
-    public Brand update(Integer id,Brand brand) {
+    public Brand update(Integer id,BrandDTO brand) {
         Brand replace = this.getById(id);
         replace.setName(brand.getName());
         return brandRepository.save(replace);

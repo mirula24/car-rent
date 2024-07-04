@@ -9,6 +9,6 @@ public interface BrandService {
     Brand create(BrandDTO brand);
     Brand getById(Integer id);
     Page<Brand> getAll(Pageable pageable,String name);
-    Brand update(Integer id,Brand brand);
+    Brand update(Integer id,BrandDTO brand);
     void delete(Integer id);
 }
