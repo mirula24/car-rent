@@ -6,6 +6,7 @@ import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.UnexpectedTypeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -15,14 +16,18 @@ public class errorController {
     public ResponseEntity<?> handleConstraintViolationException(ConstraintViolationException e) {
         return Res.renderJson(null, e.getMessage(), HttpStatus.BAD_REQUEST);
     }
+@ExceptionHandler(MethodArgumentNotValidException.class)
+public ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
 
+        return Res.renderJson(null,"wrong Input", HttpStatus.BAD_REQUEST);
+}
     @ExceptionHandler(UnexpectedTypeException.class)
     public ResponseEntity<?> handleUnexpectedType(UnexpectedTypeException e) {
         String message = e.getMessage();
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
-        if (e.getMessage().contains("brand_id")) {
-            message = "this field cannot be blank";
+        if (e.getMessage().contains("black")) {
+            message = "the field cannot be blank";
         }
         return Res.renderJson(null,message, status);
     }
@@ -32,9 +37,9 @@ public class errorController {
         String message = e.getMessage();
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
-        if (e.getMessage().contains("User with id")) {
-            message = "User not found";
+        if (e.getMessage().contains(" with id")) {
+            message = "the field not found";
         }
-        return Res.renderJson(null, message, HttpStatus.BAD_REQUEST);
+        return Res.renderJson(null, message, status);
     }
 }
