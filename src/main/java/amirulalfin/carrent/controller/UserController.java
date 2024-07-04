@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @PutMapping()
-    public User update(@RequestBody UserDTO request) {
+    public User update(@Valid @RequestBody UserDTO request) {
         return userService.update(request.getId(),request);
     }
 

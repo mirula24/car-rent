@@ -54,8 +54,9 @@ public class BrandController
 
 
     @PutMapping
-    public Brand update(@RequestBody Brand brand){
-        return brandService.update(brand.getId(),brand);
+    public Brand update(@Valid @RequestParam Integer id,
+                        @RequestBody BrandDTO brand){
+        return brandService.update(id,brand);
     }
 
     @DeleteMapping("/{id}")
